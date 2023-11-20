@@ -203,9 +203,7 @@ public class LoghubAppender<E> extends UnsynchronizedAppenderBase<E> {
             producer.send(projectConfig.getProject(), logStore, topic, source, logItems, new LoghubAppenderCallback<E>(this,
                     projectConfig.getProject(), logStore, topic, source, logItems));
         } catch (Exception e) {
-            System.out.printf("Failed to send log, project: %s, logstore: %s, topic:%s, source: %s, logItemSize: %d, error: %s, \n stack: %s\n", 
-            projectConfig.getProject(), logStore, topic, source, logItems.size(),
-            e.getMessage());
+            System.out.printf("Failed to send log, project: %s, logStore: %s, topic:%s, source: %s, logItemSize: %d, error: %s\n", projectConfig.getProject(), logStore, topic, source, logItems.size(), e.getMessage());
             e.printStackTrace(System.out);
         }
     }
