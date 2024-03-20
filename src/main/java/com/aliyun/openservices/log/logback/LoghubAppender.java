@@ -84,6 +84,10 @@ public class LoghubAppender<E> extends UnsynchronizedAppenderBase<E> {
             doStart();
         } catch (Exception e) {
             addError("Failed to start LoghubAppender.", e);
+        } catch (Throwable t) {
+            t.printStackTrace();
+            System.out.println("throw start");
+            throw t;
         }
     }
 
@@ -93,7 +97,13 @@ public class LoghubAppender<E> extends UnsynchronizedAppenderBase<E> {
         }catch (Exception e){
             formatter1 = java.time.format.DateTimeFormatter.ofPattern(timeFormat).withZone(ZoneId.of(timeZone));
         }
-        producer = createProducer();
+        try{
+            producer = createProducer();
+        }catch (Throwable t) {
+            t.printStackTrace();
+            System.out.println("throw createProducer");
+            throw t;
+        }
         super.start();
     }
 
